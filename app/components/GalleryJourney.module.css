@@ -82,6 +82,7 @@
 
 .stage {
   --art-zoom: 1;
+  --details-phase: 0;
   --info-reveal: 0;
   --journey-progress: 0;
   --room-accent: var(--acid);
@@ -195,17 +196,58 @@
   width: 30px;
 }
 
+.phaseGuide {
+  align-items: center;
+  bottom: 24px;
+  display: flex;
+  gap: 22px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 8;
+}
+
+.phaseGuide span {
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  opacity: 0.28;
+  position: relative;
+  text-transform: uppercase;
+  transition: opacity 220ms ease;
+}
+
+.phaseGuide span::before {
+  background: currentColor;
+  content: "";
+  height: 1px;
+  left: 0;
+  opacity: 0.35;
+  position: absolute;
+  right: 0;
+  top: -8px;
+}
+
+.phaseGuide .activePhase {
+  opacity: 1;
+}
+
+.phaseGuide .activePhase::before {
+  background: var(--room-accent);
+  height: 3px;
+  opacity: 1;
+}
+
 .colorWall {
   background: var(--room-accent);
-  height: 80svh;
-  left: 20vw;
+  height: calc(88svh - var(--details-phase) * 8svh);
+  left: calc(12vw + var(--details-phase) * 8vw);
   opacity: 0.9;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%) scaleY(calc(0.9 + var(--info-reveal) * 0.1));
+  transform: translateY(-50%);
   transform-origin: center;
   transition: background-color 380ms ease;
-  width: 31vw;
+  width: calc(72vw - var(--details-phase) * 41vw);
   z-index: 1;
 }
 
@@ -218,7 +260,7 @@
   letter-spacing: -0.075em;
   line-height: 0.76;
   margin: 0;
-  opacity: 0.07;
+  opacity: calc(0.12 - var(--details-phase) * 0.05);
   position: absolute;
   right: 2vw;
   text-align: center;
@@ -232,14 +274,16 @@
   background: transparent;
   border: 0;
   cursor: zoom-in;
-  height: min(74svh, 750px);
-  left: 7.5vw;
+  height: min(82svh, 840px);
+  left: 8vw;
   padding: 0;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%) scale(var(--art-zoom));
+  transform: translateX(calc(var(--details-phase) * -12vw))
+    translateY(-50%)
+    scale(calc(var(--art-zoom) - var(--details-phase) * 0.25));
   transform-origin: center;
-  width: min(59vw, 1020px);
+  width: min(84vw, 1420px);
   z-index: 3;
 }
 
@@ -278,6 +322,8 @@
   position: absolute;
   right: -9px;
   text-transform: uppercase;
+  opacity: calc(1 - var(--details-phase));
+  transform: translateY(calc(var(--details-phase) * 12px));
 }
 
 .artworkButton > span i {
@@ -290,6 +336,7 @@
   border: 1px solid rgba(23, 21, 18, 0.32);
   box-shadow: 0 24px 60px rgba(9, 8, 7, 0.12);
   opacity: var(--info-reveal);
+  pointer-events: none;
   padding: 28px 30px 30px;
   position: absolute;
   right: 4.3vw;
@@ -297,6 +344,10 @@
   transform: translateY(calc(-50% + (1 - var(--info-reveal)) * 30px));
   width: min(29vw, 440px);
   z-index: 6;
+}
+
+.cartelActive {
+  pointer-events: auto;
 }
 
 .cartel::before {
@@ -581,8 +632,8 @@
 
 @media (max-width: 1050px) {
   .artworkButton {
-    left: 7vw;
-    width: 57vw;
+    left: 8vw;
+    width: 78vw;
   }
 
   .cartel {
@@ -664,12 +715,12 @@
   }
 
   .colorWall {
-    height: 48svh;
-    left: 7vw;
-    top: 5svh;
-    transform: scaleY(calc(0.9 + var(--info-reveal) * 0.1));
+    height: calc(78svh - var(--details-phase) * 30svh);
+    left: calc(4vw + var(--details-phase) * 3vw);
+    top: 6svh;
+    transform: none;
     transform-origin: top;
-    width: 86vw;
+    width: calc(92vw - var(--details-phase) * 6vw);
   }
 
   .backdropTitle {
@@ -680,12 +731,17 @@
   }
 
   .artworkButton {
-    height: 50svh;
-    left: 8vw;
-    top: 4svh;
-    transform: scale(var(--art-zoom));
+    height: 76svh;
+    left: 4vw;
+    top: 7svh;
+    transform: translateY(calc(var(--details-phase) * -14svh))
+      scale(calc(var(--art-zoom) - var(--details-phase) * 0.31));
     transform-origin: top center;
-    width: 84vw;
+    width: 92vw;
+  }
+
+  .phaseGuide {
+    display: none;
   }
 
   .artworkButton > span {

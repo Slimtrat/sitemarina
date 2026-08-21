@@ -73,19 +73,21 @@ export function GalleryJourney({ artworks }: { artworks: Artwork[] }) {
   if (artworks.length === 0) return null;
 
   const artwork = artworks[activeIndex];
-  const revealIn = clamp((localProgress - 0.03) / 0.2);
+  const detailsPhase = clamp((localProgress - 0.24) / 0.32);
   const revealOut =
     activeIndex === artworks.length - 1
       ? 1
       : clamp((1 - localProgress) / 0.1);
-  const infoReveal = revealIn * revealOut;
+  const infoReveal = detailsPhase * revealOut;
+  const phaseIndex = localProgress < 0.24 ? 0 : localProgress < 0.68 ? 1 : 2;
   const overallProgress =
     (activeIndex + localProgress) / Math.max(1, artworks.length);
   const trackStyle = {
     "--gallery-count": artworks.length,
   } as CSSProperties;
   const stageStyle = {
-    "--art-zoom": 0.985 + localProgress * 0.055,
+    "--art-zoom": 1 + localProgress * 0.025,
+    "--details-phase": detailsPhase,
     "--info-reveal": infoReveal,
     "--journey-progress": overallProgress,
     "--room-accent": roomAccents[activeIndex % roomAccents.length],
@@ -156,6 +158,14 @@ export function GalleryJourney({ artworks }: { artworks: Artwork[] }) {
             <span>{String(artworks.length).padStart(2, "0")}</span>
           </div>
 
+          <div className={styles.phaseGuide} aria-hidden="true">
+            {["Regarder", "Comprendre", "Acquérir"].map((label, index) => (
+              <span className={index === phaseIndex ? styles.activePhase : ""} key={label}>
+                {label}
+              </span>
+            ))}
+          </div>
+
           <div className={styles.colorWall} aria-hidden="true" />
           <p className={styles.backdropTitle} aria-hidden="true">{artwork.title}</p>
 
@@ -170,7 +180,7 @@ export function GalleryJourney({ artworks }: { artworks: Artwork[] }) {
             <span>Voir en grand <i aria-hidden="true">＋</i></span>
           </button>
 
-          <aside className={styles.cartel} aria-live="polite">
+          <aside className={`${styles.cartel} ${infoReveal > 0.75 ? styles.cartelActive : ""}`} aria-live="polite">
             <div className={styles.cartelTopline}>
               <p>{String(activeIndex + 1).padStart(2, "0")}</p>
               <i />
