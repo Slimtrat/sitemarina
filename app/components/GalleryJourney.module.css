@@ -1,0 +1,602 @@
+.gallery {
+  background: #f7f2e9;
+  color: var(--ink);
+  position: relative;
+}
+
+.prelude {
+  align-items: end;
+  display: grid;
+  grid-template-columns: 0.7fr 2.3fr;
+  min-height: 78svh;
+  padding: 90px 5vw 80px;
+  position: relative;
+}
+
+.prelude > :global(.eyebrow) {
+  align-self: start;
+  margin-top: 10px;
+}
+
+.prelude h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(4.2rem, 9.2vw, 10rem);
+  font-weight: 400;
+  grid-column: 2;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+  margin: 0;
+}
+
+.prelude h2 em {
+  color: var(--coral);
+  font-weight: 400;
+}
+
+.preludeNote {
+  align-items: center;
+  bottom: 78px;
+  display: flex;
+  gap: 18px;
+  left: 5vw;
+  position: absolute;
+  width: 220px;
+}
+
+.preludeNote > span {
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  flex: 0 0 auto;
+  height: 38px;
+  place-items: center;
+  width: 38px;
+}
+
+.preludeNote p {
+  font-size: 0.64rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.track {
+  height: calc((var(--gallery-count) + 1) * 100svh);
+  position: relative;
+}
+
+.stage {
+  --art-zoom: 1;
+  --info-reveal: 0;
+  --journey-progress: 0;
+  color: var(--ink);
+  height: 100svh;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  transition: background-color 600ms ease, color 600ms ease;
+}
+
+.tone0 {
+  background: #e7dfd1;
+}
+
+.tone1 {
+  background: #191714;
+  color: #fffdf8;
+}
+
+.tone2 {
+  background: #df87b5;
+}
+
+.progress {
+  background: currentColor;
+  height: 1px;
+  left: 0;
+  opacity: 0.18;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 5;
+}
+
+.progress i {
+  background: var(--acid);
+  display: block;
+  height: 3px;
+  opacity: 1;
+  transform: scaleX(var(--journey-progress));
+  transform-origin: left;
+  width: 100%;
+}
+
+.anchors {
+  display: grid;
+  gap: 15px;
+  left: 34px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+}
+
+.anchors button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  gap: 9px;
+  padding: 0;
+}
+
+.anchors span {
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.anchors i {
+  background: currentColor;
+  display: block;
+  height: 1px;
+  opacity: 0.36;
+  transition: opacity 200ms ease, width 200ms ease;
+  width: 12px;
+}
+
+.anchors button:hover span,
+.anchors .activeAnchor span {
+  opacity: 1;
+  transform: none;
+}
+
+.anchors .activeAnchor i {
+  opacity: 1;
+  width: 34px;
+}
+
+.stageCount {
+  align-items: center;
+  display: flex;
+  font-size: 0.55rem;
+  gap: 10px;
+  letter-spacing: 0.1em;
+  position: absolute;
+  right: 34px;
+  top: 28px;
+  z-index: 5;
+}
+
+.stageCount i {
+  background: currentColor;
+  height: 1px;
+  opacity: 0.45;
+  width: 30px;
+}
+
+.artworkButton {
+  animation: artEnter 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  background: transparent;
+  border: 0;
+  cursor: zoom-in;
+  height: min(76svh, 760px);
+  left: 9vw;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(var(--art-zoom));
+  transform-origin: center;
+  width: min(57vw, 980px);
+  z-index: 2;
+}
+
+.artworkButton::after {
+  border: 1px solid currentColor;
+  content: "";
+  inset: -9px;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 200ms ease;
+}
+
+.artworkButton:hover::after,
+.artworkButton:focus-visible::after {
+  opacity: 0.48;
+}
+
+.artworkButton img {
+  box-shadow: 0 32px 80px rgba(9, 8, 7, 0.16);
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.artworkButton > span {
+  align-items: center;
+  bottom: -34px;
+  display: flex;
+  font-size: 0.56rem;
+  gap: 10px;
+  letter-spacing: 0.12em;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+}
+
+.artworkButton > span i {
+  font-size: 0.9rem;
+  font-style: normal;
+}
+
+.cartel {
+  bottom: 9vh;
+  opacity: var(--info-reveal);
+  position: absolute;
+  right: 5vw;
+  transform: translateY(calc((1 - var(--info-reveal)) * 34px));
+  width: min(28vw, 430px);
+  z-index: 4;
+}
+
+.kicker {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+.cartel h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.6rem, 4.4vw, 5.2rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+  margin: 0 0 25px;
+}
+
+.specs {
+  border-bottom: 1px solid currentColor;
+  border-top: 1px solid currentColor;
+  display: flex;
+  font-size: 0.57rem;
+  justify-content: space-between;
+  letter-spacing: 0.08em;
+  opacity: 0.68;
+  padding: 12px 0;
+  text-transform: uppercase;
+}
+
+.specs p {
+  margin: 0;
+}
+
+.description {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 22px 0 28px;
+}
+
+.cartelBottom {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartelBottom strong {
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.cartelBottom button,
+.viewerInfo > button {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.58rem;
+  letter-spacing: 0.09em;
+  padding: 0 0 7px;
+  text-transform: uppercase;
+}
+
+.scrollCue {
+  align-items: center;
+  bottom: 24px;
+  display: flex;
+  font-size: 0.52rem;
+  gap: 12px;
+  left: 34px;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  z-index: 5;
+}
+
+.scrollCue span {
+  font-size: 0.8rem;
+}
+
+.viewer {
+  background: #11100e;
+  color: #fffdf8;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(310px, 0.3fr);
+  inset: 0;
+  min-height: 100svh;
+  position: fixed;
+  z-index: 200;
+}
+
+.viewerClose {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.58rem;
+  gap: 13px;
+  letter-spacing: 0.12em;
+  position: absolute;
+  right: 28px;
+  text-transform: uppercase;
+  top: 24px;
+  z-index: 3;
+}
+
+.viewerClose span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 0.8;
+}
+
+.viewerImage {
+  align-items: center;
+  animation: viewerEnter 300ms ease both;
+  display: flex;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 5vh 5vw;
+}
+
+.viewerImage img {
+  height: 88svh;
+  object-fit: contain;
+  width: 100%;
+}
+
+.viewerInfo {
+  align-self: end;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 90px 34px 55px;
+}
+
+.viewerInfo > p {
+  font-size: 0.57rem;
+  letter-spacing: 0.12em;
+  margin: 0 0 24px;
+}
+
+.viewerInfo h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.7rem, 4vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  margin: 0 0 36px;
+}
+
+.viewerInfo dl {
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  margin: 0 0 34px;
+}
+
+.viewerInfo dl > div {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  display: flex;
+  font-size: 0.58rem;
+  justify-content: space-between;
+  letter-spacing: 0.07em;
+  padding: 12px 0;
+  text-transform: uppercase;
+}
+
+.viewerInfo dt {
+  opacity: 0.5;
+}
+
+.viewerInfo dd {
+  margin: 0;
+  text-align: right;
+}
+
+.viewerNav {
+  bottom: 24px;
+  display: flex;
+  gap: 8px;
+  left: 28px;
+  position: absolute;
+}
+
+.viewerNav button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  color: inherit;
+  cursor: pointer;
+  display: grid;
+  height: 42px;
+  place-items: center;
+  width: 42px;
+}
+
+@keyframes artEnter {
+  from { opacity: 0; filter: blur(5px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+@keyframes viewerEnter {
+  from { opacity: 0; transform: scale(0.985); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 1000px) {
+  .artworkButton {
+    left: 8vw;
+    width: 55vw;
+  }
+
+  .cartel {
+    right: 4vw;
+    width: 31vw;
+  }
+
+  .cartel h3 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+  }
+}
+
+@media (max-width: 760px) {
+  .prelude {
+    display: block;
+    min-height: 72svh;
+    padding: 75px 20px 80px;
+  }
+
+  .prelude > :global(.eyebrow) {
+    margin-bottom: 55px;
+  }
+
+  .prelude h2 {
+    font-size: clamp(4rem, 19vw, 6.2rem);
+  }
+
+  .preludeNote {
+    bottom: 28px;
+    left: 20px;
+    width: min(80vw, 300px);
+  }
+
+  .anchors {
+    bottom: 18px;
+    display: flex;
+    gap: 18px;
+    left: 20px;
+    top: auto;
+    transform: none;
+  }
+
+  .anchors button {
+    display: block;
+  }
+
+  .anchors span {
+    opacity: 0.55;
+    transform: none;
+  }
+
+  .anchors i {
+    display: none;
+  }
+
+  .anchors .activeAnchor span {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+
+  .stageCount {
+    right: 20px;
+    top: 18px;
+  }
+
+  .artworkButton {
+    height: 52svh;
+    left: 8vw;
+    top: 5svh;
+    transform: scale(var(--art-zoom));
+    transform-origin: top center;
+    width: 84vw;
+  }
+
+  .artworkButton > span {
+    bottom: -26px;
+  }
+
+  .cartel {
+    bottom: 11svh;
+    left: 20px;
+    right: 20px;
+    width: auto;
+  }
+
+  .cartel h3 {
+    font-size: clamp(2.6rem, 13vw, 4.2rem);
+    margin-bottom: 16px;
+  }
+
+  .description {
+    display: none;
+  }
+
+  .specs {
+    margin-bottom: 18px;
+  }
+
+  .scrollCue {
+    display: none;
+  }
+
+  .viewer {
+    display: block;
+    overflow-y: auto;
+  }
+
+  .viewerImage {
+    min-height: 68svh;
+    padding: 58px 16px 16px;
+  }
+
+  .viewerImage img {
+    height: 58svh;
+  }
+
+  .viewerInfo {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 34px 20px 95px;
+  }
+
+  .viewerClose {
+    position: fixed;
+    right: 18px;
+    top: 18px;
+  }
+
+  .viewerNav {
+    bottom: 18px;
+    left: 20px;
+    position: fixed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artworkButton,
+  .viewerImage {
+    animation: none;
+  }
+
+  .artworkButton {
+    transform: translateY(-50%);
+  }
+}

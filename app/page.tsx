@@ -1,5 +1,5 @@
-import { ArtworkDrawer } from "./components/ArtworkDrawer";
 import { CommissionDrawer } from "./components/CommissionDrawer";
+import { GalleryJourney } from "./components/GalleryJourney";
 import { artworks } from "../lib/artworks";
 
 export const metadata = {
@@ -7,9 +7,6 @@ export const metadata = {
 };
 
 export default function Home() {
-  const availableArtworks = artworks.filter(
-    (artwork) => artwork.status === "available",
-  );
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -72,11 +69,9 @@ export default function Home() {
           </h1>
         </div>
         <a className="hero-link" href="#oeuvres">
-          Voir toute la collection <span aria-hidden="true">↓</span>
+          Parcourir la collection <span aria-hidden="true">↓</span>
         </a>
-        <p className="hero-index" aria-hidden="true">
-          COLLECTION 01 — 2026
-        </p>
+        <p className="hero-index" aria-hidden="true">COLLECTION 01 — 2026</p>
       </section>
 
       <section className="arrival-bridge" aria-labelledby="arrival-title">
@@ -89,12 +84,8 @@ export default function Home() {
             autour d’une pièce disponible ou d’une commande.
           </p>
           <div className="arrival-links">
-            <a href="#oeuvres">
-              Explorer les œuvres <span aria-hidden="true">↓</span>
-            </a>
-            <a href="#commande">
-              Imaginer une commande <span aria-hidden="true">↗</span>
-            </a>
+            <a href="#oeuvres">Entrer dans la galerie <span aria-hidden="true">↓</span></a>
+            <a href="#commande">Imaginer une commande <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </section>
@@ -108,48 +99,11 @@ export default function Home() {
         <p className="manifesto-signature">— Marina</p>
       </section>
 
-      <section className="works" id="oeuvres" aria-labelledby="works-title">
-        <div className="section-heading">
-          <p className="eyebrow">
-            {availableArtworks.length} œuvres disponibles · Pièces uniques
-          </p>
-          <h2 id="works-title">Chaque toile est un passage.</h2>
-        </div>
-
-        <div className="works-grid">
-          {artworks.map((artwork, index) => (
-            <article className={`work-card work-card-${index + 1}`} key={artwork.id}>
-              <div className="work-image-wrap">
-                <img src={artwork.image} alt={artwork.imageAlt} />
-                <span className="work-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className={`availability-tag ${artwork.status}`}>
-                  {artwork.status === "available" ? "Disponible" : "Vendue"}
-                </span>
-              </div>
-              <div className="work-card-heading">
-                <div>
-                  <p>{artwork.year}</p>
-                  <h3>{artwork.title}</h3>
-                </div>
-                <strong>{artwork.priceLabel}</strong>
-              </div>
-              <p className="work-medium">
-                {artwork.medium} · {artwork.dimensions}
-              </p>
-              <ArtworkDrawer artwork={artwork} />
-            </article>
-          ))}
-        </div>
-      </section>
+      <GalleryJourney artworks={artworks} />
 
       <section className="detail-break" aria-label="Détail d’une œuvre">
         <div className="detail-image">
-          <img
-            src="/art/le-songe.png"
-            alt="Détail de la peinture Le Songe, visage et formes colorées"
-          />
+          <img src="/art/le-songe.png" alt="Détail de la peinture Le Songe, visage et formes colorées" />
         </div>
         <div className="detail-copy">
           <p className="eyebrow">Regarder de près</p>
@@ -179,18 +133,13 @@ export default function Home() {
             porte les traces du geste, les changements de direction et les couches
             qui ont permis à l’image d’émerger.
           </p>
-          <a href="mailto:bonjour@ateliermarina.fr">
-            Parler avec l’artiste <span aria-hidden="true">↗</span>
-          </a>
+          <a href="mailto:bonjour@ateliermarina.fr">Parler avec l’artiste <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
       <section className="campaign" id="journal" aria-labelledby="campaign-title">
         <div className="campaign-photo">
-          <img
-            src="/art/portrait-editorial.png"
-            alt="Portrait éditorial de l’artiste portant son œuvre"
-          />
+          <img src="/art/portrait-editorial.png" alt="Portrait éditorial de l’artiste portant son œuvre" />
         </div>
         <div className="campaign-copy">
           <p className="eyebrow">Le journal d’une œuvre</p>
@@ -200,7 +149,7 @@ export default function Home() {
             éditorial, le regard rapproché, puis son histoire. Un rituel visuel pour
             reconnaître l’univers avant même de lire le nom.
           </p>
-          <a href="#oeuvres">Retrouver toutes les œuvres ↗</a>
+          <a href="#oeuvres">Revenir à la galerie ↗</a>
         </div>
       </section>
 
@@ -240,9 +189,7 @@ export default function Home() {
       <footer id="contact">
         <div className="footer-invitation">
           <p className="eyebrow">Une question, une visite, une œuvre à imaginer</p>
-          <a href="mailto:bonjour@ateliermarina.fr">
-            Écrivez-moi <span aria-hidden="true">↗</span>
-          </a>
+          <a href="mailto:bonjour@ateliermarina.fr">Écrivez-moi <span aria-hidden="true">↗</span></a>
         </div>
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} Marina</p>

@@ -20,7 +20,7 @@ async function request(path = "/") {
   );
 }
 
-test("renders the editorial storefront with meaningful SEO content", async () => {
+test("renders the immersive editorial gallery with meaningful SEO content", async () => {
   const response = await request("/");
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -28,11 +28,13 @@ test("renders the editorial storefront with meaningful SEO content", async () =>
   const html = await response.text();
   assert.match(html, /<title>Marina — Peintures originales<\/title>/i);
   assert.match(html, /Des mondes à/);
-  assert.match(html, /Le Monde intérieur/);
-  assert.match(html, /Voir et acquérir/);
+  assert.match(html, /Une œuvre/);
+  assert.match(html, /Tout l’espace/);
+  assert.match(html, /Ouvrir l’œuvre Le Monde intérieur en grand/);
+  assert.match(html, /Acquérir cette œuvre/);
+  assert.match(html, /Aller à Le Songe/);
   assert.match(html, /Après Instagram/);
   assert.match(html, /Commandes sur mesure/);
-  assert.match(html, /Une œuvre qui commence par une conversation/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /certificat original/i);
   assert.doesNotMatch(html, /V1|V2 commerce|paiement intégré/i);
