@@ -29,9 +29,13 @@ test("renders the editorial storefront with meaningful SEO content", async () =>
   assert.match(html, /<title>Marina — Peintures originales<\/title>/i);
   assert.match(html, /Des mondes à/);
   assert.match(html, /Le Monde intérieur/);
-  assert.match(html, /Acquérir l’œuvre/);
+  assert.match(html, /Voir et acquérir/);
+  assert.match(html, /Après Instagram/);
+  assert.match(html, /Commandes sur mesure/);
+  assert.match(html, /Une œuvre qui commence par une conversation/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /certificat original/i);
+  assert.doesNotMatch(html, /V1|V2 commerce|paiement intégré/i);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|Starter Project/i);
 });
 

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./stronger.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -10,13 +11,13 @@ export const metadata: Metadata = {
     template: "%s — Marina",
   },
   description:
-    "Peintures originales et pièces uniques de Marina. Découvrez un univers organique, libre et intensément coloré.",
+    "Peintures originales et commandes sur mesure de Marina. Découvrez les pièces uniques disponibles et entrez dans un univers organique, libre et intensément coloré.",
   keywords: [
     "art contemporain",
     "peinture originale",
     "artiste peintre",
     "œuvre unique",
-    "peinture colorée",
+    "commande peinture sur mesure",
   ],
   authors: [{ name: "Marina" }],
   creator: "Marina",
@@ -30,13 +31,20 @@ export const metadata: Metadata = {
     siteName: "Marina",
     title: "Marina — Des mondes à habiter",
     description:
-      "Peintures originales, formes vivantes et pièces uniques à découvrir.",
+      "Peintures originales, pièces uniques disponibles et commandes sur mesure.",
+    images: [
+      {
+        url: "/art/portrait-editorial.png",
+        alt: "Marina, artiste masquée portant une œuvre originale",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Marina — Des mondes à habiter",
     description:
-      "Peintures originales, formes vivantes et pièces uniques à découvrir.",
+      "Peintures originales, pièces uniques disponibles et commandes sur mesure.",
+    images: ["/art/portrait-editorial.png"],
   },
 };
 
