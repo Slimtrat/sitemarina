@@ -29,7 +29,9 @@ test("renders the immersive editorial gallery with meaningful SEO content", asyn
   assert.match(html, /<title>Marina — Peintures originales<\/title>/i);
   assert.match(html, /Des mondes à/);
   assert.match(html, /Une œuvre/);
-  assert.match(html, /Tout l’espace/);
+  assert.match(html, /Prendre le temps/);
+  assert.match(html, /La peinture garde/);
+  assert.match(html, /id="matiere"/);
   assert.match(html, /Ouvrir l’œuvre Le Monde intérieur en grand/);
   assert.match(html, /Acquérir cette œuvre/);
   assert.match(html, /Aller à Le Songe/);

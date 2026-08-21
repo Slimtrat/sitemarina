@@ -101,7 +101,7 @@ export default function Home() {
 
       <GalleryJourney artworks={artworks} />
 
-      <section className="detail-break" aria-label="Détail d’une œuvre">
+      <section className="detail-break" id="matiere" aria-label="Détail d’une œuvre">
         <div className="detail-image">
           <img src="/art/le-songe.png" alt="Détail de la peinture Le Songe, visage et formes colorées" />
         </div>
